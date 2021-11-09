@@ -1,0 +1,42 @@
+>>> from events.models import Event
+>>> e = Event()
+>>> e = Event.objects.create(tittle="koncert Abby", description="eeeeee", location="Paris", available=True, available_from="2021-12-17", event_time="18:00:00", price=90.00)
+>>> Event.objects.get(pk=1)
+>>> Event.objects.all()
+
+
+
+Interaktywna konsola pythona:
+python3 manage.py shell
+
+
+Dodawanie danych do modelu
+
+Gdy mamy już zdefiniowany (pamiętajmy o migracjach) cały model możemy dodawać do niego dane.
+
+Aby dodać do modelu jakiś rekord, należy:
+
+    utworzyć instancję modelu,
+    wypełnić wszystkie pola w utworzonym obiekcie,
+    zapisać dane modelu do bazy danych.
+
+Django ORM automatycznie wygeneruje i wykona odpowiednie zapytanie SQL.
+
+
+Dodawanie danych
+Przykład:
+
+from edu.models import Topping, Pizza
+t = Topping()
+t.name = "anchovies"
+t.price = 3.50
+t.save()
+p = Pizza()
+p.size = 2
+p.save()
+
+Skrótem prościej
+
+t = Topping.objects.create(name="anchovies", price=3.50)
+
+

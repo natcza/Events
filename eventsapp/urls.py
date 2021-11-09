@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from events.views import show_number
+from events.views import (
+    MainView,
+    EventDetailsView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('shownum/<int:number>', show_number),
+    path('', MainView.as_view(), name='main'),
+    path('details/<int:pk>/', EventDetailsView.as_view(), name='details'),
 ]

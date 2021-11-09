@@ -1,15 +1,19 @@
-from django.shortcuts import render
-from django.http import HttpRequest
-from django.http import HttpResponse
+import random
+
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 
-# Create your views here.
-def show_number(request, number):
-    answer = f"""
-    <html>
-    <body>
-    <p>The answer is {number}!</p>
-    </body>
-    </html>
-    """
-    return HttpResponse(answer)
+from .models import Event
+
+
+class MainView(View):
+    def get(self, request):
+        events = Event.objects.all()
+        return render(request, 'index.html', context={'events': events})
+
+
+class EventDetailsView(View):
+    def get(self, request, *args, **kwargs):
+        event_id = kwargs['pk']
+        event = get_object_or_404(Event, pk=event_id)
+        return render(request, 'detail.html', context={'event': event})
